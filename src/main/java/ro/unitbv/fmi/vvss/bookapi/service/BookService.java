@@ -2,6 +2,7 @@ package ro.unitbv.fmi.vvss.bookapi.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ro.unitbv.fmi.vvss.bookapi.model.Book;
 import ro.unitbv.fmi.vvss.bookapi.repository.BookRepository;
 import ro.unitbv.fmi.vvss.bookapi.service.exception.BookNotFoundException;
@@ -28,5 +29,20 @@ public class BookService {
     public Book findBookById(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Book with id " + id + " not found."));
+    }
+
+    public List<Book> searchBooks(String title, String author) {
+        boolean hasTitle = StringUtils.hasText(title);
+        boolean hasAuthor = StringUtils.hasText(author);
+
+        if (hasTitle && hasAuthor) {
+            return bookRepository.findByTitleContainingIgnoreCaseAndAuthorContainingIgnoreCase(title, author);
+        } else if (hasTitle) {
+            return bookRepository.findByTitleContainingIgnoreCase(title);
+        } else if (hasAuthor) {
+            return bookRepository.findByAuthorContainingIgnoreCase(author);
+        } else {
+            return bookRepository.findAll();
+        }
     }
 }
