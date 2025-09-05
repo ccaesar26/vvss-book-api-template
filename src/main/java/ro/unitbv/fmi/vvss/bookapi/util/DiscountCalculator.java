@@ -1,6 +1,5 @@
 package ro.unitbv.fmi.vvss.bookapi.util;
 
-import lombok.NoArgsConstructor;
 import ro.unitbv.fmi.vvss.bookapi.model.Book;
 import java.math.BigDecimal;
 import java.math.RoundingMode;

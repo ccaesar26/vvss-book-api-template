@@ -1,4 +1,3 @@
-// src/main/java/ro/unitbv/fmi/vvss/bookapi/validation/BookDataValidator.java
 package ro.unitbv.fmi.vvss.bookapi.validation;
 
 import org.springframework.util.StringUtils;
